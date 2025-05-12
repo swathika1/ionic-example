@@ -1,0 +1,58 @@
+<ion-header slot>
+  <ion-toolbar>
+    <ion-button (click)="closeModal()" slot="start" fill="clear">Cancel</ion-button>
+    
+    <ion-title>{{ newExpense.id ? 'Update' : 'New' }} Expense</ion-title>
+    <ion-button (click)="updateExpense()" slot="end" fill="clear">{{ newExpense.id ? 'Update' : 'Add' }}</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item>
+  <ion-input placeholder="Name" label="Merchant" [(ngModel)]="newExpense.merchant" name="merchant"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-input placeholder="0.00" label="$" type="number" [(ngModel)]="newExpense.cost" slot></ion-input>
+</ion-item>
+<ion-item lines="full">
+   <ion-label>Date</ion-label>
+   <ion-datetime-button datetime="expense-datetime"></ion-datetime-button>
+   <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime id="expense-datetime" presentation="date" [(ngModel)]="newExpense.date"></ion-datetime>
+    </ng-template>
+   </ion-modal>
+   </ion-item>
+
+<ion-list-header>
+      <ion-label color="ios-lh-labl-gray">Details</ion-label>
+    </ion-list-header>
+<ion-list>
+   <ion-item>
+   <ion-select role="combobox" label="Category" placeholder="Select One" [(ngModel)]="newExpense.category" slot>
+      <ion-select-option value="Office">Office Expense</ion-select-option>
+      <ion-select-option value="Parking">Parking</ion-select-option>
+      <ion-select-option value="Recruiting">Recruiting</ion-select-option>
+      <ion-select-option value="Shipping">Shipping</ion-select-option>
+      <ion-select-option value="Software">Software</ion-select-option>
+      <ion-select-option value="Travel - Airfare">Travel - Airfare</ion-select-option>
+      <ion-select-option value="Travel - Hotel">Travel - Hotel</ion-select-option>
+      <ion-select-option value="Travel - Meals">Travel - Meals</ion-select-option>
+    </ion-select>
+   </ion-item>
+   <ion-item slot lines="full">
+   <ion-input placeholder="Additional details..." label="Notes" [(ngModel)]="newExpense.note" slot></ion-input>
+   </ion-item>
+</ion-list>   
+   <ion-list-header>
+      <ion-label color="ios-lh-labl-gray">Upload Receipt</ion-label>
+    </ion-list-header>
+
+  <img [src]="safeReceipt" (click)="captureReceipt()" />
+   
+<ion-fab horizontal="center" vertical="bottom" >
+    <ion-fab-button (click)="captureReceipt()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

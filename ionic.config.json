@@ -1,0 +1,8 @@
+{
+  "name": "Ionifits",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "34df4710"
+}
